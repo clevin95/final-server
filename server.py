@@ -54,8 +54,8 @@ def run(server_class=HTTPServer, handler_class=S, port=1000):
     httpd.serve_forever()
 
 if __name__ == "__main__":
-    from sys import argv
-	run()
+	from sys import argv
+    run()
     # if len(argv) == 2:
     #     run(port=int(argv[1]))
     # else:
