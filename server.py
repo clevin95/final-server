@@ -45,9 +45,7 @@ class S(BaseHTTPRequestHandler):
 		file_name = data['file_name']
 		downloader.download_image(file_name)
 		print(parser.parse_image(file_name))
-
 		return
-
 
 def run(server_class=HTTPServer, handler_class=S, port=80):
     server_address = ('', port)
