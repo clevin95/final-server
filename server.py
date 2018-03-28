@@ -47,7 +47,7 @@ class S(BaseHTTPRequestHandler):
 		print(parser.parse_image(file_name))
 		return
 
-def run(server_class=HTTPServer, handler_class=S, port=80):
+def run(server_class=HTTPServer, handler_class=S, port=1000):
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
     print('Starting httpd...')
@@ -55,8 +55,8 @@ def run(server_class=HTTPServer, handler_class=S, port=80):
 
 if __name__ == "__main__":
     from sys import argv
-
-    if len(argv) == 2:
-        run(port=int(argv[1]))
-    else:
-        run()
+	run()
+    # if len(argv) == 2:
+    #     run(port=int(argv[1]))
+    # else:
+    #     run()
