@@ -2,34 +2,17 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler, BaseHTTPRequestHan
 from cgi import parse_header, parse_multipart
 from urllib.parse import parse_qs
 import simplejson
+import json
 import downloader
 import parser
 import os
 
 class S(BaseHTTPRequestHandler):
-	def parse_POST(self):
-		ctype, pdict = parse_header(self.headers['content-type'])
-		if ctype == 'multipart/form-data':
-			postvars = parse_multipart(self.rfile, pdict)
-		elif ctype == 'application/x-www-form-urlencoded':
-			length = int(self.headers['content-length'])
-			postvars = parse_qs(self.rfile.read(length), keep_blank_values=1)
-		else:
-		    postvars = {}
-		return postvars
-
 	def _set_headers(self):
 		self.send_response(200)
-		self.send_header('Content-type', 'text/html')
+		self.send_header('Content-type', 'application/json')
 		self.end_headers()
-
-	def do_GET(self):
-		self._set_headers()
-		self.wfile.write("<html><body><h1>hi!</h1></body></html>")
-
-	def do_HEAD(self):
-		self._set_headers()
-        
+    
 	def do_POST(self):
 		self._set_headers()
 		self.data_string = self.rfile.read(int(self.headers['Content-Length']))
@@ -38,12 +21,12 @@ class S(BaseHTTPRequestHandler):
 		self.end_headers()
 
 		data = simplejson.loads(self.data_string)
-		with open("test123456.json", "w") as outfile:
-		    simplejson.dump(data, outfile)
 		file_name = data['file_name']
 		downloader.download_image(file_name)
-		print(parser.parse_image(file_name))
-		return
+		parse_dic = parser.parse_image(file_name)
+		formatted_dic = parser.parse_image(file_name)
+		formatted_json = json.dumps(formatted_dic)
+		self.wfile.write(formatted_json.encode())
 
 PORT = int(os.environ['PORT'])
 def run(server_class=HTTPServer, handler_class=S, port=PORT):
