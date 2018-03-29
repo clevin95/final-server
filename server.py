@@ -1,12 +1,12 @@
 from http.server import HTTPServer, SimpleHTTPRequestHandler, BaseHTTPRequestHandler
 import base64
 from cgi import parse_header, parse_multipart
-from requests_toolbelt.multipart import decoder
 from urllib.parse import parse_qs
-from http.server import BaseHTTPRequestHandler
 import simplejson
 import downloader
 import parser
+from sys import argv
+import os
 
 class S(BaseHTTPRequestHandler):
 	def parse_POST(self):
@@ -47,15 +47,15 @@ class S(BaseHTTPRequestHandler):
 		print(parser.parse_image(file_name))
 		return
 
-def run(server_class=HTTPServer, handler_class=S, port=1000):
+PORT = int(os.environ['PORT'])
+def run(server_class=HTTPServer, handler_class=S, port=PORT):
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
     print('Starting httpd...')
     httpd.serve_forever()
 
 if __name__ == "__main__":
-	from sys import argv
-    run()
+	run()
     # if len(argv) == 2:
     #     run(port=int(argv[1]))
     # else:
