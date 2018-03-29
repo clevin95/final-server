@@ -2,9 +2,8 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler, BaseHTTPRequestHan
 from cgi import parse_header, parse_multipart
 from urllib.parse import parse_qs
 import simplejson
-# import downloader
-# import parser
-# from sys import argv
+import downloader
+import parser
 import os
 
 class S(BaseHTTPRequestHandler):
@@ -32,20 +31,19 @@ class S(BaseHTTPRequestHandler):
 		self._set_headers()
         
 	def do_POST(self):
-		print("NOTHING HERE")
-		# self._set_headers()
-		# self.data_string = self.rfile.read(int(self.headers['Content-Length']))
+		self._set_headers()
+		self.data_string = self.rfile.read(int(self.headers['Content-Length']))
 
-		# self.send_response(200)
-		# self.end_headers()
+		self.send_response(200)
+		self.end_headers()
 
-		# data = simplejson.loads(self.data_string)
-		# with open("test123456.json", "w") as outfile:
-		#     simplejson.dump(data, outfile)
-		# file_name = data['file_name']
-		# downloader.download_image(file_name)
-		# print(parser.parse_image(file_name))
-		# return
+		data = simplejson.loads(self.data_string)
+		with open("test123456.json", "w") as outfile:
+		    simplejson.dump(data, outfile)
+		file_name = data['file_name']
+		downloader.download_image(file_name)
+		print(parser.parse_image(file_name))
+		return
 
 PORT = int(os.environ['PORT'])
 def run(server_class=HTTPServer, handler_class=S, port=PORT):
@@ -56,7 +54,3 @@ def run(server_class=HTTPServer, handler_class=S, port=PORT):
 
 if __name__ == "__main__":
 	run()
-    # if len(argv) == 2:
-    #     run(port=int(argv[1]))
-    # else:
-    #     run()

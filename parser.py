@@ -1,13 +1,7 @@
 import io
 import sys
 import os
-import numpy as np
-import argparse
-import cv2
-from io import StringIO
 import re
-from PIL import Image
-import calendar
 
 # Imports the Google Cloud client library
 from google.cloud import vision
@@ -98,7 +92,6 @@ def parse_words(full_string):
 
 
 def parse_image(sign_directory):
-	# sign_directory = sys.argv[1]
 	client = vision.ImageAnnotatorClient()
 	file_name = os.path.join(
 	    os.path.dirname(__file__),
