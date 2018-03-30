@@ -15,12 +15,11 @@ class S(BaseHTTPRequestHandler):
     
 	def do_POST(self):
 		self._set_headers()
-		self.data_string = self.rfile.read(int(self.headers['Content-Length']))
+		body_data = self.rfile.read(int(self.headers['Content-Length']))
 
-		self.send_response(200)
 		self.end_headers()
 
-		data = simplejson.loads(self.data_string)
+		data = simplejson.loads(body_data)
 		file_name = data['file_name']
 		downloader.download_image(file_name)
 		parse_dic = parser.parse_image(file_name)
