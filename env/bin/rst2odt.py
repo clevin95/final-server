@@ -1,4 +1,4 @@
-#!/Users/carterlevin/Documents/Yale/S18/final/project/env/bin/python3.6
+#!/Users/carterlevin/Documents/Yale/S18/final/server/env/bin/python3
 
 # $Id: rst2odt.py 5839 2009-01-07 19:09:28Z dkuhlman $
 # Author: Dave Kuhlman <dkuhlman@rexx.com>

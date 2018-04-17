@@ -91,26 +91,28 @@ def parse_words(full_string):
 	return content
 
 
-def parse_image(sign_directory):
+def parse_image(all_signs):
 	client = vision.ImageAnnotatorClient()
-	file_name = os.path.join(
-	    os.path.dirname(__file__),
-	    sign_directory)
-
-	# Loads the image into memory
-	with io.open(file_name, 'rb') as image_file:
-	    content = image_file.read()
-
-	image = types.Image(content=content)
-	# Performs label detection on the image file
-	response = client.text_detection(image=image)
-	labels = response.label_annotations
-	full_text = response.full_text_annotation.text
-	payload = {}
 	signs = []
 
-	signs.append(parse_words(full_text))
-	payload["signs"] = signs
+	for sign_name in all_signs:
+		name = "cropped/" + sign_name
+		path = os.path.join(
+		    os.path.dirname(__file__),
+		    name)
 
-	return payload
+		# Loads the image into memory
+		with io.open(path, 'rb') as image_file:
+		    content = image_file.read()
+
+		image = types.Image(content=content)
+		# Performs label detection on the image file
+		response = client.text_detection(image=image)
+		labels = response.label_annotations
+		full_text = response.full_text_annotation.text
+		payload = {}
+
+		signs.append(parse_words(full_text))
+
+	return signs
 

@@ -5,6 +5,7 @@ import simplejson
 import json
 import downloader
 import parser
+import crop
 import os
 
 class S(BaseHTTPRequestHandler):
@@ -21,10 +22,21 @@ class S(BaseHTTPRequestHandler):
 
 		data = simplejson.loads(body_data)
 		file_name = data['file_name']
+		print(file_name)
 		downloader.download_image(file_name)
-		parse_dic = parser.parse_image(file_name)
-		formatted_dic = parser.parse_image(file_name)
-		formatted_json = json.dumps(formatted_dic)
+
+
+		signs = crop.signs_from_image(file_name)
+		print(signs)
+
+		red_signs = signs["red"]
+		green_signs = signs["green"]
+
+		response = {}
+		response["red"] = parser.parse_image(red_signs)
+		response["green"] = parser.parse_image(green_signs)
+
+		formatted_json = json.dumps(response)
 		self.wfile.write(formatted_json.encode())
 
 PORT = int(os.environ['PORT'])

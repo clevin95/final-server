@@ -2,4 +2,5 @@ boto3
 botocore
 simplejson
 numpy
+opencv-python
 google-cloud

@@ -1,4 +1,4 @@
-#!/Users/carterlevin/Documents/Yale/S18/final/project/env/bin/python3.6
+#!/Users/carterlevin/Documents/Yale/S18/final/server/env/bin/python3
 
 # $Id: rst2latex.py 5905 2009-04-16 12:04:49Z milde $
 # Author: David Goodger <goodger@python.org>
