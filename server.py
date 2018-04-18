@@ -3,7 +3,7 @@ import simplejson
 import json
 import downloader
 import parser
-import crop
+# import crop
 import os
 
 class S(BaseHTTPRequestHandler):
@@ -24,18 +24,18 @@ class S(BaseHTTPRequestHandler):
 		downloader.download_image(file_name)
 
 
-		signs = crop.signs_from_image(file_name)
-		print(signs)
+		# signs = crop.signs_from_image(file_name)
+		# print(signs)
 
-		red_signs = signs["red"]
-		green_signs = signs["green"]
+		# red_signs = signs["red"]
+		# green_signs = signs["green"]
 
-		response = {}
-		response["red"] = parser.parse_image(red_signs)
-		response["green"] = parser.parse_image(green_signs)
+		# response = {}
+		# response["red"] = parser.parse_image(red_signs)
+		# response["green"] = parser.parse_image(green_signs)
 
-		formatted_json = json.dumps(response)
-		self.wfile.write(formatted_json.encode())
+		# formatted_json = json.dumps(response)
+		# self.wfile.write(formatted_json.encode())
 
 PORT = int(os.environ['PORT'])
 def run(server_class=HTTPServer, handler_class=S, port=PORT):
