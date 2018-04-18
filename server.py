@@ -3,6 +3,7 @@ import simplejson
 import json
 import downloader
 import parser
+import cv2
 # import crop
 import os
 
