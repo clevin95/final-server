@@ -1,6 +1,4 @@
 from http.server import HTTPServer, SimpleHTTPRequestHandler, BaseHTTPRequestHandler
-from cgi import parse_header, parse_multipart
-from urllib.parse import parse_qs
 import simplejson
 import json
 import downloader
