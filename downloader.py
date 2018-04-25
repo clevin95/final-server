@@ -4,8 +4,8 @@ import botocore
 BUCKET_NAME = 'parking-signs' # replace with your bucket name
 s3 = boto3.resource('s3')
 s3 = boto3.resource('s3',
-         aws_access_key_id="AKIAJACS3JWHBLW5KX7Q",
-         aws_secret_access_key="LW6SH+XflZgV6IIiz9aizphPKQ41TMv+rvTydtuo")
+         aws_access_key_id="",
+         aws_secret_access_key="")
 
 def download_image(image_name):
 	try:
